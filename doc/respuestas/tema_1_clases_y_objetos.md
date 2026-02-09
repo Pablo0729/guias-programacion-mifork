@@ -85,6 +85,8 @@ No todos los lenguajes gestionan la memoria de la misma forma. En C++, por ejemp
 
 La recolección de basura (garbage collection) es un mecanismo automático que se encarga de liberar la memoria ocupada por objetos que ya no están en uso. En Java, este proceso se ejecuta en segundo plano y detecta cuándo un objeto ha dejado de ser accesible desde cualquier parte del programa. Una vez identificado, el recolector libera su espacio en el heap, evitando fugas de memoria y reduciendo la carga del programador. Este enfoque contrasta con lenguajes como C++, donde la liberación debe hacerse manualmente mediante delete.
 
+DESVENTAJAS: Al utilizar el heap puede existir una pérdida de memoria. Hay que liberar la memoria de forma manual.
+
 
 ## 7. ¿Qué es un método? ¿Qué es la **sobrecarga de métodos**? 
 
@@ -117,6 +119,32 @@ La palabra clave static indica que un método o atributo pertenece a la clase y 
 
 Cuando static se combina con la palabra clave final, se obtiene un elemento que es compartido por la clase y cuyo valor no puede modificarse. Esta combinación se utiliza habitualmente para definir constantes, como static final double PI = 3.14159;. De este modo, se garantiza que el valor es único, accesible sin crear objetos y no puede alterarse accidentalmente durante la ejecución del programa.
 
+/* 
+//Anotaciones de clase
+
+
+Ejemplo:
+
+class Ejercicio1{
+    public static void main (String[] args){
+        System exit(2);
+
+        }
+        static final double PI = 3.14;
+        CONSTANTESC
+    }
+    
+static:
+Dice que el atributo o método pertenece a la clase no a una instancia concreta.
+No se necesita un objeto para un valor.
+No existe this.
+No puedo usar desde un método static nada que no sea static.
+No abusar!!!!!!
+
+
+
+*/
+
 ## 10. Intenta ejecutar un poco de Java de forma básica, con los comandos `javac` y `java`. ¿Cómo podemos compilar el programa y ejecutarlo desde linea de comandos? ¿Java es compilado? ¿Qué es la **máquina virtual**? ¿Qué es el *byte-code* y los ficheros `.class`?
 
 Para compilar y ejecutar un programa en Java desde la línea de comandos se utilizan dos herramientas básicas: javac y java. El comando javac se encarga de compilar el archivo .java, mientras que java ejecuta el programa ya compilado. Por ejemplo, si se tiene un archivo llamado Hola.java, primero se compila con javac Hola.java, lo que genera un archivo Hola.class. Después, se ejecuta con java Hola, sin incluir la extensión. Este proceso recuerda al de C/C++, pero con la diferencia de que Java no genera un ejecutable nativo, sino un archivo intermedio.
@@ -126,6 +154,12 @@ Java se considera un lenguaje compilado e interpretado a la vez. El código fuen
 La Máquina Virtual de Java (JVM) es el componente encargado de interpretar y ejecutar el bytecode. Actúa como una capa intermedia entre el programa y el sistema operativo, lo que permite que el mismo archivo .class funcione en Windows, Linux o macOS sin necesidad de recompilar. La JVM también gestiona aspectos como la memoria, la seguridad y la recolección de basura, lo que simplifica el trabajo del programador y reduce errores comunes.
 
 El bytecode es, por tanto, el formato intermedio que hace posible la portabilidad de Java. Los archivos .class contienen estas instrucciones y son el resultado directo de la compilación. Cuando se ejecuta un programa, la JVM lee estos archivos, los interpreta o los optimiza mediante compilación Just-In-Time (JIT) y finalmente los ejecuta. Este modelo híbrido permite combinar portabilidad con un rendimiento razonablemente alto, manteniendo al mismo tiempo un entorno controlado y seguro para la ejecución del código.
+
+/*
+//ANOTACIONES DE CLASE
+
+<img width="250" height="103" alt="image" src="https://github.com/user-attachments/assets/cf4f9273-60d9-4bbb-b1dc-7b87fb47066f" />
+
 
 
 ## 11. En el código anterior de la clase `Punto` ¿Qué es `new`? ¿Qué es un **constructor**? Pon un ejemplo de constructor en una clase `Empleado` que tenga DNI, nombre y apellidos
@@ -188,8 +222,9 @@ class Punto {
     }
 
     double distanciaA(Punto otro) {
-        int dx = this.x - otro.x;
-        int dy = this.y - otro.y;
+    //distancia entre this y otro
+        double dx = this.x - otro.x;
+        double dy = this.y - otro.y;
         return Math.sqrt(dx * dx + dy * dy);
     }
 }
