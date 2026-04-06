@@ -1,17 +1,4 @@
-<!--
-Posible prompt:
-<prompt>
-Tengo un cuestionario con preguntas sobre "Encapsulación". Debes tener en cuenta que los conocimientos previos que tengo (y por tanto tus respuestas deben ser adaptadas), son:
-- C/C++ sin orientación a objetos.
-- Temas de Java previos: Clases y Objetos.
 
-Cada respuesta debe tener entre 2 - 4 párrafos de longitud (sin contar los trozos de código).
-
-Por favor, escribe en impersonal las respuestas.
-
-</prompt>
-----
--->
 # TEMA 2. Encapsulación
 
 ## 1. En Programación Orientada a Objetos (POO), ¿Qué buscan la **encapsulación** y **la ocultación** de información? Enumera brevemente algunas ventajas de la ocultación de información.
@@ -57,11 +44,11 @@ La **ocultación de información** ayuda directamente a mantener estas invariant
 
 ## 5. Pon un ejemplo de una clase `Punto` en `Java`, con dos coordenadas, `x` e `y`, de tipo `double`, con un método `calcularDistanciaAOrigen`, y que haga uso de la ocultación de información. ¿Cuál es la interfaz pública de la clase `Punto`? ¿Qué significa `public` y `private`?
 
-public class Punto {
+public class Punto { //Privado
     private double x;
     private double y;
 
-    public Punto(double x, double y) {
+    public Punto(double x, double y) { //Público
         this.x = x;
         this.y = y;
     }
@@ -75,9 +62,11 @@ public class Punto {
     }
 
     public double calcularDistanciaAOrigen() {
-        return Math.sqrt(x * x + y * y);
+        return Math.sqrt(this.x * this.x + this.y * this.y); 
     }
 }
+
+//En nuestra mente: todo es privado hasta que se demuestre lo contrario.
 
 La interfaz pública de esta clase está formada por todos los elementos declarados como public: el constructor Punto(double, double), los métodos getX(), getY() y calcularDistanciaAOrigen(). Estos son los únicos puntos de acceso permitidos desde fuera de la clase, mientras que los atributos x e y permanecen ocultos. De este modo, cualquier interacción con el objeto debe realizarse a través de estos métodos, lo que permite mantener las invariantes de clase y evitar modificaciones directas del estado interno.
 
@@ -136,11 +125,6 @@ En este ejemplo, `otro.x` y `otro.y` son privados, pero el método puede acceder
 
 ## 9. ¿Qué son los métodos "getter" y "setter" en los lenguajes orientados a objetos?
 
-Perfecto, Pablo. Como esto es **teoría**, aquí tienes la explicación en **3–4 párrafos en Markdown**, con tono de profesor y comparaciones con C++.
-
----
-
-## ¿Qué son los métodos *getter* y *setter*?
 
 En los lenguajes orientados a objetos, los métodos **getter** y **setter** son funciones públicas que permiten **acceder** y **modificar** atributos privados de una clase respetando la encapsulación. Un *getter* devuelve el valor de un atributo, mientras que un *setter* permite cambiarlo de forma controlada. La idea es que el estado interno del objeto no quede expuesto directamente, sino que pase por una interfaz segura. Esto evita errores, inconsistencias y permite añadir validaciones cuando sea necesario.
 
@@ -189,7 +173,6 @@ En resumen, la diferencia clave es que los miembros de instancia pertenecen a ca
 
 ## 12. Brevemente: ¿Tiene sentido que los constructores sean privados?
 
-## ¿Tiene sentido que los constructores sean privados?
 
 Sí, tiene sentido que los constructores sean privados en ciertos patrones de diseño, aunque a primera vista pueda parecer contradictorio. Un constructor privado impide que el código externo cree instancias libremente, lo que permite a la clase controlar completamente cuántos objetos existen y cómo se crean. En Java, igual que en C++, esto se usa cuando queremos restringir la creación de objetos para garantizar coherencia, eficiencia o seguridad lógica dentro del programa.
 
@@ -203,7 +186,6 @@ En resumen, aunque no es lo más común en clases simples, los constructores pri
 
 ## 13. ¿Cómo se indican los **miembros de clase** en Java? Pon un ejemplo, en la clase `Punto` definida anteriormente, para que incluya miembros de clase que permitan saber cuáles son los valores `x` e `y` máximos que se han establecido en todos los puntos que se hayan creado hasta el momento.
 
-## Miembros de clase en Java y ejemplo aplicado a `Punto`
 
 En Java, los **miembros de clase** se indican con la palabra clave `static`. Esto significa que el atributo o método pertenece a la **clase en sí**, no a cada objeto individual. Todos los objetos comparten una única copia de ese miembro, lo que permite almacenar información global o común a todas las instancias. Esta idea coincide con C++, donde también se usa `static` para declarar miembros compartidos por todas las instancias de una clase. 
 
@@ -298,7 +280,6 @@ Si quieres, podemos extender esto para que siga funcionando con los métodos est
 
 ## 16. Si un atributo va a tener un método "getter" y "setter" públicos, ¿no es mejor declararlo público? ¿Cuál es la convención más habitual sobre los atributos, que sean públicos o privados? ¿Tiene esto algo que ver con las "invariantes de clase"?
 
-## ¿Tiene sentido hacer público un atributo si ya tiene *getter* y *setter*?
 
 Aunque pueda parecer que un atributo con *getter* y *setter* públicos es equivalente a declararlo directamente como público, en realidad no lo es. Cuando declaras un atributo como `public`, cualquier parte del programa puede leerlo y modificarlo sin ningún tipo de control. En cambio, cuando usas *getters* y *setters*, aunque sean públicos, sigues manteniendo la posibilidad de **interponer lógica**, validaciones o restricciones en el acceso. Esto preserva la encapsulación, que es uno de los principios fundamentales de la programación orientada a objetos tanto en Java como en C++.  
 
@@ -325,7 +306,6 @@ Las clases inmutables tienen varias ventajas importantes. Son más seguras frent
 
 ## 18. ¿Es recomendable incluir métodos "setter" siempre y como convención?
 
-## ¿Qué significa que una clase sea inmutable?
 
 Una clase **inmutable** es aquella cuyos objetos no pueden cambiar su estado interno una vez creados. Esto significa que, tras llamar al constructor, todos los atributos quedan fijados y no existe ningún método que los modifique. En Java, esto se consigue declarando los atributos como `private` y `final`, y evitando cualquier método que altere su valor. En C++ la idea es similar, aunque se suele lograr mediante `const` y evitando exponer métodos que modifiquen el estado. La inmutabilidad aporta claridad conceptual: un objeto representa un valor que no cambia, como ocurre con `String` en Java.
 
@@ -339,24 +319,108 @@ Las clases inmutables tienen varias ventajas importantes. Son más seguras frent
 
 ## 19. ¿La clase `String` en Java es mutable o inmutable? ¿Qué ocurre al concatenar dos cadenas? ¿Qué debemos hacer si vamos a hacer una operación que implique concatenar muchas veces para construir paso a paso una cadena muy larga?
 
-### Respuesta
+La clase `String` en Java es **inmutable**, lo que significa que una vez creada una cadena, su contenido no puede modificarse. Este comportamiento contrasta con C/C++, donde los arreglos de caracteres pueden alterarse directamente. En Java, cualquier operación que parezca modificar una cadena en realidad crea un nuevo objeto `String`, manteniendo intacto el original. Esta decisión de diseño aporta seguridad y coherencia, ya que evita que distintos fragmentos del programa alteren accidentalmente el mismo texto.
+
+Cuando se concatenan dos cadenas usando el operador `+`, Java genera internamente un **nuevo objeto `String`** que contiene el resultado de la concatenación. Esto implica que, si se realizan muchas concatenaciones dentro de un bucle, se estarán creando múltiples objetos intermedios, lo que puede afectar al rendimiento y al consumo de memoria. Aunque este proceso es transparente para el programador, resulta ineficiente cuando se construyen cadenas largas de forma incremental.
+
+Para operaciones que impliquen concatenar repetidamente, la práctica recomendada es utilizar la clase **`StringBuilder`**, que sí es mutable. Con `StringBuilder`, las modificaciones se realizan sobre el mismo objeto, evitando la creación de múltiples instancias temporales. Una vez finalizada la construcción de la cadena, puede obtenerse un `String` definitivo mediante el método `toString()`. Este enfoque proporciona un rendimiento significativamente superior en escenarios donde se generan textos extensos paso a paso.
+
 
 
 ## 20. En POO ¿Cómo se comparan objetos de una misma clase? ¿Por su contenido o por su identidad? ¿Qué es el método equals en Java? ¿Qué hace por defecto? ¿Cómo se deben comparar dos cadenas en Java? 
 
-### Respuesta
+En programación orientada a objetos, dos objetos de una misma clase pueden compararse por **identidad** o por **contenido**. La identidad se refiere a si ambos objetos ocupan la misma posición en memoria, mientras que el contenido evalúa si los valores almacenados en sus atributos son equivalentes. En Java, el operador `==` compara únicamente la identidad, del mismo modo que en C/C++ se comparan direcciones de memoria cuando se trabaja con punteros. Por tanto, `==` no es adecuado para determinar si dos objetos “son iguales” en el sentido lógico del programa.
+
+El método `equals()` es el mecanismo que Java proporciona para comparar objetos por su **contenido lógico**. Todas las clases heredan este método desde `Object`, pero su implementación por defecto compara identidad, no contenido. Esto significa que, si una clase no sobrescribe `equals()`, el resultado será equivalente a usar `==`. Para que dos objetos se consideren iguales según sus atributos, es necesario redefinir `equals()` siguiendo criterios coherentes con la lógica de la clase.
+
+En el caso particular de las cadenas, Java sobrescribe `equals()` en la clase `String` para que compare el **contenido textual** carácter por carácter. Por ello, dos cadenas con el mismo texto deben compararse mediante `equals()` y no con `==`. El operador `==` solo indicará si ambas referencias apuntan al mismo objeto, lo cual puede coincidir en algunos casos debido al *string pool*, pero no debe utilizarse como criterio general de comparación.
+
 
 
 ## 21. ¿Qué son las clases "wrapper" en un lenguaje de programación orientado a objetos? ¿Cómo se hace? ¿Es un proceso automático? ¿Qué ventajas tienen? ¿Todos los lenguajes orientados a objetos tienen tipos primitivos y necesitan wrappers? 
 
-### Respuesta
+Las clases *wrapper* en un lenguaje orientado a objetos son clases cuyo propósito es encapsular un tipo primitivo dentro de un objeto. En Java, cada tipo primitivo (`int`, `double`, `char`, etc.) tiene su correspondiente clase *wrapper* (`Integer`, `Double`, `Character`, etc.). Estas clases permiten tratar valores primitivos como objetos, lo cual resulta necesario en contextos donde solo pueden manejarse referencias, como colecciones genéricas o ciertos mecanismos de reflexión. La idea central es envolver el valor primitivo dentro de una estructura que proporciona métodos y comportamientos adicionales.
+
+La conversión entre tipos primitivos y sus *wrappers* puede hacerse de forma explícita o automática. Java incorpora un mecanismo llamado *autoboxing* y *unboxing*, que convierte automáticamente un valor primitivo en su clase *wrapper* y viceversa. Por ejemplo, asignar un `int` a una variable `Integer` provoca que Java genere internamente el objeto correspondiente sin intervención manual. Este proceso simplifica el código y evita la necesidad de crear instancias mediante constructores o métodos estáticos como `Integer.valueOf()`.
+
+Las ventajas de los *wrappers* incluyen la posibilidad de almacenar valores primitivos en estructuras de datos que requieren objetos, disponer de métodos utilitarios para conversión y manipulación, y permitir el uso de valores nulos para representar ausencia de dato, algo que los tipos primitivos no pueden hacer. Además, facilitan la integración con APIs que operan exclusivamente con objetos, lo que aporta flexibilidad en el diseño de programas orientados a objetos.
+
+No todos los lenguajes orientados a objetos poseen tipos primitivos separados de los objetos ni requieren *wrappers*. Algunos lenguajes, como Python, tratan todos los valores como objetos desde el inicio, eliminando la distinción entre primitivo y referencia. En cambio, lenguajes como Java o C# mantienen tipos primitivos por razones de eficiencia, y por ello necesitan clases *wrapper* para integrarlos adecuadamente en el paradigma orientado a objetos.
+
 
 
 ## 22. ¿En POO qué es un **tipo de dato enumerado**? ¿En Java, un tipo de dato enumerado es una clase? ¿Qué ventajas tienen en términos de encapsulación los enumerados en Java?
 
-### Respuesta
+Un **tipo de dato enumerado** en programación orientada a objetos es una construcción que permite definir un conjunto fijo y limitado de valores posibles. Estos valores representan opciones válidas dentro de un dominio concreto, como los días de la semana, los estados de un proceso o los palos de una baraja. A diferencia de simples constantes numéricas o literales, los enumerados proporcionan un nivel adicional de seguridad y claridad, ya que restringen explícitamente el rango de valores permitidos y evitan errores derivados de usar valores arbitrarios.
+
+En Java, un tipo enumerado (`enum`) es efectivamente una **clase especial**, aunque con una sintaxis más compacta y un comportamiento más controlado. Cada valor del enumerado es una instancia única y predefinida de esa clase. Esto implica que los enumerados pueden tener atributos, métodos y constructores privados, lo que los convierte en entidades más potentes que los enumerados tradicionales de lenguajes como C. Desde el punto de vista conceptual, un `enum` en Java encapsula tanto los valores posibles como el comportamiento asociado a ellos.
+
+En términos de encapsulación, los enumerados en Java ofrecen varias ventajas. Al tratarse de clases, permiten agrupar en un mismo lugar tanto los valores válidos como la lógica relacionada, evitando dispersión y mejorando la cohesión del código. Además, al ser instancias únicas y controladas, impiden la creación de valores no previstos, reforzando la integridad del sistema. Esta combinación de restricciones y capacidad expresiva hace que los enumerados sean una herramienta robusta para modelar conjuntos cerrados de opciones dentro de un diseño orientado a objetos.
+
 
 
 ## 23. Crea un tipo enumerado en Java que se llame `Mes`, con doce posibles instancias y que además proporcione métodos para obtener cuántos días tiene ese mes, el ordinal de ese mes en el año (1-12), empleando atributos privados y constructores del tipo enumerado. Añade además cuatro métodos para devolver si ese mes tiene algunos días de invierno, primavera, verano u otoño, indicando con un booleano el hemisferio (norte o sur, parámetro `enHemisferioNorte`). Es decir: `esDePrimavera(boolean esHemisferioNorte)`, `esDeVerano(boolean esHemisferioNorte)`, `esDeOtoño(boolean esHemisferioNorte)`, `esDeInvierno(boolean esHemisferioNorte)`
 
-### Respuesta
+A continuación se presenta un tipo enumerado `Mes` que encapsula tanto los doce meses del año como la información asociada a cada uno de ellos. Cada instancia del enumerado almacena de forma privada el número de días y el ordinal correspondiente, utilizando un constructor privado para inicializar estos valores. Este enfoque permite mantener la integridad de los datos y evita que se creen meses adicionales o inconsistentes, reforzando así la encapsulación propia de los enumerados en Java.
+
+Además de los atributos básicos, el enumerado incorpora métodos para determinar si un mes pertenece parcial o totalmente a una estación concreta, teniendo en cuenta el hemisferio indicado por el parámetro `esHemisferioNorte`. Dado que las estaciones se invierten entre hemisferios, los métodos aplican la lógica correspondiente para devolver el resultado adecuado. Este diseño concentra en un único lugar tanto los datos como el comportamiento relacionado con los meses y las estaciones, lo que mejora la cohesión del código.
+
+El siguiente código muestra una implementación completa del enumerado solicitado. Se han utilizado estructuras `switch` para determinar la estación según el mes y el hemisferio, manteniendo el código claro y fácil de extender si fuese necesario. La encapsulación se refuerza mediante el uso de atributos privados y métodos públicos que exponen únicamente la información necesaria.
+
+```java
+public enum Mes {
+    ENERO(31, 1),
+    FEBRERO(28, 2),
+    MARZO(31, 3),
+    ABRIL(30, 4),
+    MAYO(31, 5),
+    JUNIO(30, 6),
+    JULIO(31, 7),
+    AGOSTO(31, 8),
+    SEPTIEMBRE(30, 9),
+    OCTUBRE(31, 10),
+    NOVIEMBRE(30, 11),
+    DICIEMBRE(31, 12);
+
+    private final int dias;
+    private final int ordinal;
+
+    private Mes(int dias, int ordinal) {
+        this.dias = dias;
+        this.ordinal = ordinal;
+    }
+
+    public int getDias() {
+        return dias;
+    }
+
+    public int getOrdinal() {
+        return ordinal;
+    }
+
+    public boolean esDePrimavera(boolean esHemisferioNorte) {
+        return esHemisferioNorte
+                ? (this == MARZO || this == ABRIL || this == MAYO)
+                : (this == SEPTIEMBRE || this == OCTUBRE || this == NOVIEMBRE);
+    }
+
+    public boolean esDeVerano(boolean esHemisferioNorte) {
+        return esHemisferioNorte
+                ? (this == JUNIO || this == JULIO || this == AGOSTO)
+                : (this == DICIEMBRE || this == ENERO || this == FEBRERO);
+    }
+
+    public boolean esDeOtono(boolean esHemisferioNorte) {
+        return esHemisferioNorte
+                ? (this == SEPTIEMBRE || this == OCTUBRE || this == NOVIEMBRE)
+                : (this == MARZO || this == ABRIL || this == MAYO);
+    }
+
+    public boolean esDeInvierno(boolean esHemisferioNorte) {
+        return esHemisferioNorte
+                ? (this == DICIEMBRE || this == ENERO || this == FEBRERO)
+                : (this == JUNIO || this == JULIO || this == AGOSTO);
+    }
+}
+```
+
