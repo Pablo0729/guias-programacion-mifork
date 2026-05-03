@@ -1,5 +1,3 @@
-
-
 ## 1. En orientación a objetos, ¿qué es la **herencia** y su relación con "A es-un B"?. Explica las dos implicaciones principales: (1) **compatibilidad de tipos** y (2) **herencia de estado y comportamiento**. Pon un ejemplo en Java muy sencillo, donde un `Soldado` tiene un `nombre` (privado) y un método `saludar()` que muestra su nombre. Hay dos subtipos: un `Artillero`, que es capaz de disparar cohetes y un `Zapador` que pone minas, ambos heredan el atributo nombre y la capacidad de saludar. Además, y de forma específica, el artillero tiene un número de cohetes y el zapador un número de minas, accesibles mediante "getters" específicos. Respecto a la compatibilidad de tipos, aprovechémosla: crea un array de `Soldado`, mete varios de distinto tipo (son todos compatibles con `Soldado`). Recórrela y que todos te saluden.
 
 La **herencia** en orientación a objetos se entiende como una relación jerárquica donde un tipo más específico *extiende* a otro más general. La frase “A es‑un B” expresa precisamente esta relación: si `Artillero` es‑un `Soldado`, entonces todo artillero puede ser tratado como soldado. Esta idea no existe en C procedural, pero sí se aproxima a cómo una estructura puede contener otra; sin embargo, en Java la herencia añade reglas formales que permiten reutilizar código y establecer jerarquías conceptuales claras. La clase base define atributos y métodos comunes, mientras que las subclases amplían o especializan ese comportamiento.
@@ -79,7 +77,7 @@ Herencia --> es un.
 2. Herencia de estado (--> atributos) y compartimento (--> métodos)
 
 
-IMAGEN
+Imagen P4_2 p1.png
 
 ```java
 private class Artillero extends Soldado{
